@@ -2,7 +2,7 @@ const { Command } = require("commander");
 
 const program = new Command();
 
-program.name("spellchk").argument("<string>");
+program.name("spellchk").option("-d, --dictionary").argument("<string>");
 
 program.parse();
 
