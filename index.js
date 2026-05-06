@@ -1,24 +1,19 @@
 const { Command } = require("commander");
-
+const word_list = require("./words_dictionary.json");
 const program = new Command();
-
+const getInput = require("./getInput");
+// console.log(getInput);
+// console.log(word_list);
 program
   .name("spellchk")
   .option("-d, --dictionary")
   .argument("[string]")
   .action(async (text) => {
-    if (!text) {
-      let pipedData = '';
-      process.stdin.setEncoding('utf8');
-      
-      for await (const chunk of process.stdin) {
-        pipedData += chunk;
-      }
-
-      console.log(pipedData.trim())
-    } else {
-      console.log(text);
-    }
+    const userInput = await getInput(text);
+    const lines = userInput.split("\n");
+    lines.map((line, index) => {
+      console.log(`line ${index + 1} : ${line}`);
+    });
   });
 
 program.parse();
